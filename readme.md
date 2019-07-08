@@ -14,7 +14,7 @@ and mounts the current working directory and `/home` on the host machine
 to `/workdir` and `/home_host` in the container respectively.
 ```
 docker run -d \
-    --name lubuntu-intellij \
+    --name lubuntu-jdk \
     --log-opt max-size=50m \
     -p 4000:4000 \
     -e DOCKER_USER=`id -un` \
@@ -24,13 +24,13 @@ docker run -d \
     -v `pwd`:/workdir \
     -v `dirname $HOME`:/home_host \
     --cap-add=SYS_PTRACE \
-    dclong/lubuntu-intellij
+    dclong/lubuntu-jdk
 ```
 The following command does the same as the above one 
 except that it limits the use of CPU and memory.
 ```
 docker run -d \
-    --name lubuntu-intellij \
+    --name lubuntu-jdk \
     --log-opt max-size=50m \
     --memory=$(($(head -n 1 /proc/meminfo | awk '{print $2}') * 4 / 5))k \
     --cpus=$((`nproc` - 1)) \
@@ -42,7 +42,7 @@ docker run -d \
     -v `pwd`:/workdir \
     -v `dirname $HOME`:/home_host \
     --cap-add=SYS_PTRACE \
-    dclong/lubuntu-intellij
+    dclong/lubuntu-jdk
 ```
 A default user `dclong` with password `dclong` is used if not specified when running the docker image.
 
